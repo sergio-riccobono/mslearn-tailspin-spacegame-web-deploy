@@ -111,7 +111,7 @@ stages:
               azureSubscription: 'Resource Manager - Tailspin - Space Game'
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
-- job: RunUITests
+  - job: RunUITests
     dependsOn: Deploy
     displayName: 'Run UI tests'
     pool:
@@ -136,6 +136,7 @@ stages:
         arguments: '--no-build --configuration $(buildConfiguration)'
         publishTestResults: true
         projects: '$(System.DefaultWorkingDirectory)/**/*UITests.csproj'
+
 - stage: 'Staging'
   displayName: 'Deploy to the staging environment'
   dependsOn: Test
